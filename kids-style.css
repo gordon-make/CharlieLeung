@@ -500,9 +500,16 @@ body {
     .container {
         max-width: 100vw;
         padding: 0 8px;
+        box-sizing: border-box;
     }
     .hero-content {
-        max-width: 100vw;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .hero-photo img, .static-photo {
+        max-width: 80vw;
+        height: auto;
     }
     .hero-title {
         font-size: 2.5em;
