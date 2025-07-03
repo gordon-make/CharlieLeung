@@ -254,6 +254,43 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Polaroid random rotation
+    document.querySelectorAll('.polaroid-photo').forEach(function(photo) {
+        // Random rotation between -8deg and +8deg
+        var rotate = (Math.random() * 16 - 8).toFixed(1);
+        photo.style.transform = 'rotate(' + rotate + 'deg)';
+        photo.setAttribute('data-rotate', rotate);
+    });
+
+    // Polaroid modal logic
+    var modal = document.getElementById('polaroidModal');
+    var modalImg = document.querySelector('.polaroid-modal-img');
+    var modalCaption = document.querySelector('.polaroid-modal-caption');
+    var modalClose = document.querySelector('.polaroid-modal-close');
+
+    document.querySelectorAll('.polaroid-photo').forEach(function(photo) {
+        photo.addEventListener('click', function() {
+            var img = photo.querySelector('img');
+            modalImg.src = img.src;
+            modalImg.alt = img.alt;
+            modalCaption.textContent = photo.getAttribute('data-caption') || img.alt;
+            modal.classList.add('open');
+        });
+    });
+    if (modalClose) {
+        modalClose.addEventListener('click', function() {
+            modal.classList.remove('open');
+        });
+    }
+    // Close modal on background click
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.remove('open');
+            }
+        });
+    }
+
     console.log('🌟 Kids Portfolio loaded successfully! 🌟');
 });
 
