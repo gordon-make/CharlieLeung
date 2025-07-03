@@ -618,10 +618,24 @@ html {
 }
 @media (max-width: 600px) {
     .photo-gallery-horizontal-wrapper {
-        height: 270px;
+        height: 140px; /* 2 x 60px + gap */
+    }
+    .photo-gallery-horizontal {
+        grid-template-rows: repeat(2, 60px);
+        grid-auto-columns: 60px;
+        width: 100%;
     }
     .photo-item {
-        width: 120px;
-        height: 120px;
+        width: 60px;
+        height: 60px;
     }
+    .shape {
+        font-size: 1.2em;
+        z-index: 1;
+    }
+    .shape-1 { top: 5%; left: 2%; }
+    .shape-2 { top: 80%; right: 2%; }
+    .shape-3 { top: 20%; right: 10%; }
+    .shape-4 { bottom: 10%; left: 10%; }
+    .shape-5 { bottom: 80%; right: 5%; }
 } 
