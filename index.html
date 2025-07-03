@@ -247,23 +247,25 @@
     <section class="section" id="photos">
         <div class="container">
             <h2 class="section-title">📸 My Photo Gallery 📸</h2>
-            <div class="photo-gallery-horizontal-wrapper">
-                <button class="photo-arrow left" onclick="scrollPhotos(-1)"><i class="fas fa-chevron-left"></i></button>
-                <div class="photo-gallery-horizontal" id="photoGallery">
-                    <div class="photo-item"><img src="Assets/CL.jpeg" alt="Charlie Leung"></div>
-                    <div class="photo-item"><img src="Assets/photo2.jpg" alt="Photo 2"></div>
-                    <div class="photo-item"><img src="Assets/photo3.jpg" alt="Photo 3"></div>
-                    <div class="photo-item"><img src="Assets/photo4.jpg" alt="Photo 4"></div>
-                    <div class="photo-item"><img src="Assets/photo5.jpg" alt="Photo 5"></div>
-                    <div class="photo-item"><img src="Assets/photo7.jpg" alt="Photo 6"></div>
-                    <div class="photo-item"><img src="Assets/photo8.jpg" alt="Photo 7"></div>
-                    <div class="photo-item"><img src="Assets/photo9.jpg" alt="Photo 8"></div>
-                    <div class="photo-item"><img src="Assets/photo10.jpg" alt="Photo 9"></div>
-                    <div class="photo-item"><img src="Assets/photo11.jpg" alt="Photo 10"></div>
-                    <div class="photo-item"><img src="Assets/photo12.jpg" alt="Photo 11"></div>
-                    <div class="photo-item"><img src="Assets/photo13.jpg" alt="Photo 12"></div>
-                </div>
-                <button class="photo-arrow right" onclick="scrollPhotos(1)"><i class="fas fa-chevron-right"></i></button>
+            <div class="polaroid-gallery">
+                <div class="polaroid-photo" data-caption="Charlie Leung"><img src="Assets/CL.jpeg" alt="Charlie Leung"></div>
+                <div class="polaroid-photo" data-caption="Photo 2"><img src="Assets/photo2.jpg" alt="Photo 2"></div>
+                <div class="polaroid-photo" data-caption="Photo 3"><img src="Assets/photo3.jpg" alt="Photo 3"></div>
+                <div class="polaroid-photo" data-caption="Photo 4"><img src="Assets/photo4.jpg" alt="Photo 4"></div>
+                <div class="polaroid-photo" data-caption="Photo 5"><img src="Assets/photo5.jpg" alt="Photo 5"></div>
+                <div class="polaroid-photo" data-caption="Photo 6"><img src="Assets/photo7.jpg" alt="Photo 6"></div>
+                <div class="polaroid-photo" data-caption="Photo 7"><img src="Assets/photo8.jpg" alt="Photo 7"></div>
+                <div class="polaroid-photo" data-caption="Photo 8"><img src="Assets/photo9.jpg" alt="Photo 8"></div>
+                <div class="polaroid-photo" data-caption="Photo 9"><img src="Assets/photo10.jpg" alt="Photo 9"></div>
+                <div class="polaroid-photo" data-caption="Photo 10"><img src="Assets/photo11.jpg" alt="Photo 10"></div>
+                <div class="polaroid-photo" data-caption="Photo 11"><img src="Assets/photo12.jpg" alt="Photo 11"></div>
+                <div class="polaroid-photo" data-caption="Photo 12"><img src="Assets/photo13.jpg" alt="Photo 12"></div>
+            </div>
+            <!-- Modal for enlarged photo -->
+            <div id="polaroidModal" class="polaroid-modal">
+                <span class="polaroid-modal-close">&times;</span>
+                <img class="polaroid-modal-img" src="" alt="">
+                <div class="polaroid-modal-caption"></div>
             </div>
         </div>
     </section>
@@ -310,7 +312,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>🌟 Made with love by [Child's Name] and family 🌟</p>
+            <p>🌟 Made with love by Charlie Leung and family 🌟</p>
             <p>Thank you for looking at my portfolio! 👋</p>
         </div>
     </footer>
