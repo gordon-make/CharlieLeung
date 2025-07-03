@@ -782,7 +782,3 @@ html {
         max-height: 50vh;
     }
 }
-
-html, body {
-    overflow-x: hidden !important;
-} 
