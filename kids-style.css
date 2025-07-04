@@ -95,6 +95,7 @@ body {
 .shape-3 { top: 30%; right: 30%; animation-delay: 2s; }
 .shape-4 { bottom: 30%; left: 20%; animation-delay: 3s; }
 .shape-5 { bottom: 60%; right: 10%; animation-delay: 4s; }
+.shape-6 { top: 50%; left: 2%; }
 
 @keyframes float {
     0%, 100% { transform: translateY(0px) rotate(0deg); }
@@ -627,6 +628,46 @@ html {
     }
 }
 @media (max-width: 600px) {
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .hero-title {
+        font-size: 2.5em;
+    }
+    .hero-stats {
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+    }
+    .stat-item {
+        width: 90%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    .hero-subtitle {
+        font-size: 1.1em;
+        padding: 0 10px;
+        word-break: break-word;
+    }
+    .nav-links {
+        display: none;
+    }
+    .about-content {
+        grid-template-columns: 1fr;
+    }
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+    .activities-grid {
+        grid-template-columns: 1fr;
+    }
+    .photo-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    .achievements-grid {
+        grid-template-columns: 1fr;
+    }
     .photo-gallery-horizontal-wrapper {
         height: 200px; /* 1 x 180px + gap */
         margin-top: 40px;
@@ -653,11 +694,12 @@ html {
         font-size: 1.2em;
         z-index: 1;
     }
-    .shape-1 { top: 5%; left: 2%; }
-    .shape-2 { top: 80%; right: 2%; }
-    .shape-3 { top: 20%; right: 10%; }
-    .shape-4 { bottom: 10%; left: 10%; }
-    .shape-5 { bottom: 80%; right: 5%; }
+    .shape-1 { top: 10%; left: 5%; }
+    .shape-2 { top: 60%; right: 5%; }
+    .shape-3 { top: 30%; right: 20%; }
+    .shape-4 { bottom: 30%; left: 15%; }
+    .shape-5 { bottom: 90%; right: 10%; }
+    .shape-6 { top: 50%; left: 2%; }
 }
 
 /* Polaroid Scattered Photo Gallery */
@@ -782,3 +824,8 @@ html {
         max-height: 50vh;
     }
 }
+
+html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw;
+} 
