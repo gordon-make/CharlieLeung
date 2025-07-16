@@ -268,7 +268,21 @@ document.addEventListener('DOMContentLoaded', function() {
     var modalCaption = document.querySelector('.polaroid-modal-caption');
     var modalClose = document.querySelector('.polaroid-modal-close');
 
-    document.querySelectorAll('.polaroid-photo').forEach(function(photo) {
+    // Album modal logic
+    var albumModal = document.getElementById('albumModal');
+    var albumModalImg = document.querySelector('.album-modal-img');
+    var albumModalCaption = document.querySelector('.album-modal-caption');
+    var albumModalTitle = document.querySelector('.album-modal-title');
+    var albumModalClose = document.querySelector('.album-modal-close');
+    var albumCounter = document.querySelector('.album-counter');
+    var prevBtn = document.querySelector('.prev-btn');
+    var nextBtn = document.querySelector('.next-btn');
+    
+    var currentAlbumPhotos = [];
+    var currentPhotoIndex = 0;
+
+    // Handle individual polaroid photos (not in albums)
+    document.querySelectorAll('.polaroid-photo:not(.album-photo)').forEach(function(photo) {
         photo.addEventListener('click', function() {
             var img = photo.querySelector('img');
             modalImg.src = img.src;
@@ -277,12 +291,76 @@ document.addEventListener('DOMContentLoaded', function() {
             modal.classList.add('open');
         });
     });
+
+    // Handle album clicks
+    document.querySelectorAll('.polaroid-album').forEach(function(album) {
+        album.addEventListener('click', function() {
+            var photos = album.querySelectorAll('.album-photo');
+            currentAlbumPhotos = Array.from(photos);
+            currentPhotoIndex = 0;
+            
+            // Set album title
+            albumModalTitle.textContent = album.getAttribute('data-album-title');
+            
+            // Show first photo
+            showAlbumPhoto(0);
+            
+            // Open album modal
+            albumModal.classList.add('open');
+        });
+    });
+
+    function showAlbumPhoto(index) {
+        if (currentAlbumPhotos.length === 0) return;
+        
+        var photo = currentAlbumPhotos[index];
+        var img = photo.querySelector('img');
+        
+        albumModalImg.src = img.src;
+        albumModalImg.alt = img.alt;
+        albumModalCaption.textContent = photo.getAttribute('data-caption') || img.alt;
+        
+        // Update counter
+        albumCounter.textContent = `${index + 1} / ${currentAlbumPhotos.length}`;
+        
+        // Update navigation buttons
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === currentAlbumPhotos.length - 1;
+        
+        currentPhotoIndex = index;
+    }
+
+    // Navigation buttons
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+            if (currentPhotoIndex > 0) {
+                showAlbumPhoto(currentPhotoIndex - 1);
+            }
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+            if (currentPhotoIndex < currentAlbumPhotos.length - 1) {
+                showAlbumPhoto(currentPhotoIndex + 1);
+            }
+        });
+    }
+
+    // Close modals
     if (modalClose) {
         modalClose.addEventListener('click', function() {
             modal.classList.remove('open');
         });
     }
-    // Close modal on background click
+    
+    if (albumModalClose) {
+        albumModalClose.addEventListener('click', function() {
+            albumModal.classList.remove('open');
+        });
+    }
+
+    // Close modals on background click
     if (modal) {
         modal.addEventListener('click', function(e) {
             if (e.target === modal) {
@@ -290,6 +368,86 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+    
+    if (albumModal) {
+        albumModal.addEventListener('click', function(e) {
+            if (e.target === albumModal) {
+                albumModal.classList.remove('open');
+            }
+        });
+    }
+
+    // Keyboard navigation for album modal
+    document.addEventListener('keydown', function(e) {
+        if (albumModal.classList.contains('open')) {
+            if (e.key === 'ArrowLeft' && currentPhotoIndex > 0) {
+                showAlbumPhoto(currentPhotoIndex - 1);
+            } else if (e.key === 'ArrowRight' && currentPhotoIndex < currentAlbumPhotos.length - 1) {
+                showAlbumPhoto(currentPhotoIndex + 1);
+            } else if (e.key === 'Escape') {
+                albumModal.classList.remove('open');
+            }
+        }
+    });
+
+    // Touch/swipe functionality for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let isSwiping = false;
+
+    function handleSwipe() {
+        if (albumModal.classList.contains('open') && currentAlbumPhotos.length > 1) {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0 && currentPhotoIndex < currentAlbumPhotos.length - 1) {
+                    // Swipe left - next photo
+                    showAlbumPhoto(currentPhotoIndex + 1);
+                } else if (diff < 0 && currentPhotoIndex > 0) {
+                    // Swipe right - previous photo
+                    showAlbumPhoto(currentPhotoIndex - 1);
+                }
+            }
+        }
+    }
+
+    // Touch events for album modal
+    if (albumModal) {
+        albumModal.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+            isSwiping = true;
+        }, { passive: true });
+
+        albumModal.addEventListener('touchmove', function(e) {
+            if (isSwiping) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        albumModal.addEventListener('touchend', function(e) {
+            if (isSwiping) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+                isSwiping = false;
+            }
+        }, { passive: true });
+    }
+
+    // Add visual feedback for swipe
+    function addSwipeFeedback() {
+        const style = document.createElement('style');
+        style.textContent = `
+            .album-modal-content {
+                transition: transform 0.3s ease;
+            }
+            .album-modal-content.swiping {
+                transition: transform 0.1s ease;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    addSwipeFeedback();
 
     console.log('🌟 Kids Portfolio loaded successfully! 🌟');
 });

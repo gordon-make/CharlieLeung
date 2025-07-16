@@ -1009,44 +1009,59 @@ html, body {
     display: flex;
     align-items: center;
     gap: 20px;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 10px 20px;
-    border-radius: 25px;
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.25);
+    padding: 12px 24px;
+    border-radius: 30px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
 
 .album-nav-btn {
-    background: rgba(255, 255, 255, 0.3);
-    border: none;
+    background: rgba(255, 255, 255, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.6);
     color: white;
-    font-size: 24px;
-    width: 40px;
-    height: 40px;
+    font-size: 28px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: bold;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
 .album-nav-btn:hover {
-    background: rgba(255, 255, 255, 0.5);
-    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(1.15);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
 .album-nav-btn:disabled {
-    opacity: 0.5;
+    opacity: 0.3;
     cursor: not-allowed;
     transform: scale(1);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.album-nav-btn:active {
+    transform: scale(0.95);
 }
 
 .album-counter {
     color: white;
     font-weight: bold;
-    font-size: 1.1em;
-    min-width: 60px;
+    font-size: 1.2em;
+    min-width: 70px;
     text-align: center;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 6px 12px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
 }
 
 .album-modal-content {
@@ -1119,19 +1134,23 @@ html, body {
     }
     
     .album-modal-nav {
-        gap: 12px;
-        padding: 6px 12px;
+        gap: 15px;
+        padding: 10px 20px;
+        background: rgba(255, 255, 255, 0.3);
     }
     
     .album-nav-btn {
-        width: 32px;
-        height: 32px;
-        font-size: 18px;
+        width: 44px;
+        height: 44px;
+        font-size: 24px;
+        background: rgba(255, 255, 255, 0.5);
+        border: 2px solid rgba(255, 255, 255, 0.7);
     }
     
     .album-counter {
-        font-size: 1em;
-        min-width: 50px;
+        font-size: 1.1em;
+        min-width: 60px;
+        padding: 8px 15px;
     }
     
     .album-modal-img {
